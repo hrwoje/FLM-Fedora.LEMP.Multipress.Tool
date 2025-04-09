@@ -40,6 +40,7 @@ FLM Uninstaller:<br>
 <pre><code id="command">
 sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FLM-Fedora.LEMP.Multipress.Tool/refs/heads/main/FLM-uninstaller.sh)"
 </code></pre><br>  
+![Image](https://github.com/user-attachments/assets/f537c256-fe1c-43f2-a10f-9e6dc16316e0)
 These commands will automatically download and run the FLM Tool installation script for Fedora systems.<br>
 No need to clone or download anything manually — just copy, paste, and you're good to go!<br><br>
 <br>
