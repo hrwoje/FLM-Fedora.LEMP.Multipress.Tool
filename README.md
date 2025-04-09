@@ -18,6 +18,7 @@ Includes a health check module to monitor and manage PHP services and server sta
 Ensures the server starts automatically on reboot
 
 Designed for local development use cases (perfect for WordPress developers)<br>
+![Image](https://github.com/user-attachments/assets/cc9a48c7-20ee-412c-bc96-cd6233d5d1fe)
 <br>
 ✅ Why this tool?<br>
 Most WordPress LEMP tools are aimed at Debian/Ubuntu systems, leaving Fedora users without a streamlined option. I created and tested this tool on Fedora 42 Desktop, ensuring it works <br>reliably in a typical developer environment.<br>
