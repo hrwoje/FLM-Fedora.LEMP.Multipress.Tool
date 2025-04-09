@@ -30,11 +30,15 @@ You can easily run the FLM Tool directly from your terminal using one of the fol
 🇬🇧 English Version:<br>
 <pre><code id="command">
 sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FLM-Fedora.LEMP.Multipress.Tool/refs/heads/main/FLM%20tool%20Englisch.sh)"
-</code></pre>
+</code></pre><br> 
 🇳🇱 Dutch Version:<br>
 <pre><code id="command">
 sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FLM-Fedora.LEMP.Multipress.Tool/refs/heads/main/FLM%20tool%20Nederlands.sh)"
-</code></pre>
+</code></pre><br> 
+Uninstaller:<br>
+<pre><code id="command">
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FLM-Fedora.LEMP.Multipress.Tool/refs/heads/main/FLM-uninstaller.sh)"
+</code></pre><br>  
 These commands will automatically download and run the FLM Tool installation script for Fedora systems.<br>
 No need to clone or download anything manually — just copy, paste, and you're good to go!<br><br>
 <br>
