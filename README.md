@@ -23,5 +23,21 @@ Most WordPress LEMP tools are aimed at Debian/Ubuntu systems, leaving Fedora use
 Just run the script in your terminal. It's easy, guided, and doesn't require deep Linux knowledge. After a reboot, your local server will be running automatically. If needed, re-run the script for quick access to the built-in health checker and management features.
 
 
+⚡ One-line Installation (Terminal Execution)
+You can easily run the FLM Tool directly from your terminal using one of the following one-liner commands. Choose your preferred language version below:
+
+🇬🇧 English Version:
+
 sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FLM-Fedora.LEMP.Multipress.Tool/refs/heads/main/FLM%20tool%20Englisch.sh)"
+
+🇳🇱 Dutch Version:
+
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FLM-Fedora.LEMP.Multipress.Tool/refs/heads/main/FLM%20tool%20Nederlands.sh)"
+
+These commands will automatically download and run the FLM Tool installation script for Fedora systems.
+No need to clone or download anything manually — just copy, paste, and you're good to go!
+
+✔️ Works out-of-the-box on Fedora Desktop
+✔️ Includes SELinux fixes, health checks, and Multipress (WordPress Multisite) management
+✔️ Perfect for setting up a local LEMP development server in seconds
 
