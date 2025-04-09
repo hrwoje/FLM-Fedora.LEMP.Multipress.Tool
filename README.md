@@ -35,7 +35,7 @@ sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FLM-Fedora
 <pre><code id="command">
 sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FLM-Fedora.LEMP.Multipress.Tool/refs/heads/main/FLM%20tool%20Nederlands.sh)"
 </code></pre><br> 
-Uninstaller:<br>
+FLM Uninstaller:<br>
 <pre><code id="command">
 sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FLM-Fedora.LEMP.Multipress.Tool/refs/heads/main/FLM-uninstaller.sh)"
 </code></pre><br>  
