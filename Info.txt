@@ -1,0 +1,119 @@
+Algemene Beschrijving van het Script
+Dit Bash-script (v2.14.2) is ontworpen om de installatie en basisoptimalisatie van een LEMP-stack (Linux, Nginx, MariaDB, PHP) te automatiseren, specifiek voor het draaien van een WordPress Multisite-installatie op Fedora-systemen. Het doel is om snel een lokale test- of ontwikkelomgeving op te zetten met redelijke prestatie-instellingen en handige beheertools. Het script installeert ook phpMyAdmin voor databasebeheer en configureert APCu als PHP object cache mechanisme (vereist handmatige activatie van een bijbehorende WordPress-plugin). Het biedt een interactief menu voor installatie, configuratieaanpassingen, probleemoplossing en beheer.
+Auteur: H Dabo (Concept & Basis) / AI (Implementatie & Verfijning) - 2025
+Versie: v2.14.2 (Nederlandse versie met diverse fixes en features)
+Beschrijving van de Menu Functionaliteiten
+Het script presenteert een hoofdmenu met de volgende opties:
+[1] Installeren
+Doel: Voert een volledige, nieuwe installatie uit van alle benodigde componenten.
+Acties:
+Update systeempakketten (dnf update).
+Installeert core utilities, Nginx, MariaDB (database server), PHP (via DNF module of Remi repo), phpMyAdmin, en benodigde PHP-extensies (inclusief GD, Imagick, Curl, Mbstring, APCu, etc.).
+Configureert MariaDB met basisoptimalisaties voor InnoDB en stelt het root wachtwoord in (standaard 'root' of een aangepast wachtwoord).
+Maakt de WordPress database en gebruiker aan.
+Configureert PHP met aangepaste limieten (memory_limit, upload_max_filesize, etc.) en stelt OPcache en APCu in.
+Configureert PHP-FPM om te draaien als de nginx gebruiker.
+Installeert de nieuwste versie van WordPress en WP-CLI.
+Configureert WordPress voor Multisite (subdirectory modus standaard) en voegt de WP_CACHE constante toe voor APCu.
+Configureert Nginx met een geoptimaliseerd serverblok voor WordPress (inclusief security headers, Gzip, correcte PHP handling, phpMyAdmin toegang).
+Configureert SELinux voor webserver toegang tot WordPress bestanden en netwerkconnecties.
+Configureert de firewall (firewalld) om HTTP en HTTPS verkeer toe te staan.
+Maakt benodigde log directories aan (/var/log/nginx, /var/log/php-fpm).
+Interactie: Vraagt om keuze voor database root wachtwoord (standaard/aangepast) en om gewenste WordPress admin gebruikersnaam en wachtwoord.
+[2] Herinstalleren
+Doel: Verwijdert de volledige bestaande installatie (inclusief data!) en voert daarna een schone installatie uit zoals bij optie [1].
+Acties: Roept eerst de 'Verwijderen' functie aan, en daarna de 'Installeren' functie.
+Interactie: Vraagt om meerdere bevestigingen vanwege het destructieve karakter, en vervolgens om de keuzes voor de nieuwe installatie (DB ww, WP admin).
+WAARSCHUWING: Zeer destructief! Alle website data, databases en configuraties gaan verloren.
+[3] Verwijderen
+Doel: Verwijdert alle geïnstalleerde componenten, configuraties, logs en data gerelateerd aan dit script.
+Acties:
+Stopt en schakelt Nginx, MariaDB, PHP-FPM services uit.
+Verwijdert firewall regels voor HTTP/HTTPS.
+Verwijdert de database data directory (/var/lib/mysql) na expliciete bevestiging.
+Verwijdert geïnstalleerde packages (Nginx, MariaDB, PHP + extensies, PMA, WP-CLI, etc.).
+Verwijdert configuratiebestanden (Nginx vhost, MariaDB optimalisaties, PMA config, PHP extensie configs, backups).
+Verwijdert de WordPress root directory (/var/www/wordpress) na expliciete bevestiging.
+Verwijdert logbestanden en directories (/var/log/nginx, /var/log/php-fpm, script log).
+Verwijdert SELinux context voor de WordPress content map.
+Interactie: Vraagt om meerdere expliciete bevestigingen ('JA', 'VERWIJDER DB', 'VERWIJDER WP') om dataverlies te voorkomen.
+WAARSCHUWING: Extreem destructief! Gebruik met grote voorzichtigheid.
+[P] PHP Instellingen
+Doel: Maakt het mogelijk om veelvoorkomende php.ini limieten interactief aan te passen.
+Acties:
+Toont de huidige waarde (indien gevonden) van memory_limit, post_max_size, max_execution_time, upload_max_filesize, max_input_time, max_input_vars.
+Vraagt de gebruiker om een nieuwe waarde in te voeren (Enter = huidige behouden).
+Maakt een backup van /etc/php.ini.
+Past de waarden aan in /etc/php.ini met sed.
+Herstart PHP-FPM om de wijzigingen door te voeren.
+Interactie: Vraagt om invoer voor elke instelling.
+[E] PHP Extensies
+Doel: Biedt een overzicht van geïnstalleerde PHP-extensies (gebaseerd op .ini bestanden in /etc/php.d) en maakt het mogelijk om extensies die via een extension= regel worden geladen, aan of uit te zetten.
+Acties:
+Scant /etc/php.d op .ini bestanden.
+Gebruikt php -m om te bepalen welke modules daadwerkelijk geladen zijn.
+Toont een genummerde lijst met status (Enabled, Disabled, Enabled (Auto), Enabled (Zend), Unknown).
+Markeert extensies die een (gecommenteerde of actieve) extension= regel hebben met een * (deze zijn wisselbaar).
+Laat de gebruiker een nummer kiezen om de status van een wisselbare extensie te veranderen (comment/uncomment de extension= regel met sed).
+Maakt een backup van het .ini bestand voor elke wijziging.
+Na afsluiten met '0' wordt PHP-FPM herstart als er wijzigingen zijn gemaakt.
+Interactie: Vraagt om nummerkeuze om te wisselen, '0' om op te slaan/af te sluiten, 'q' om af te sluiten zonder opslaan.
+Beperking: Kan alleen extensies beheren die een duidelijke extension= regel in hun .ini bestand hebben. Ingebouwde of automatisch geladen modules worden wel getoond als "Enabled (Auto)" maar kunnen niet gewisseld worden. Zend extensies worden apart gemarkeerd en kunnen ook niet gewisseld worden.
+[M] Multisite Toggle
+Doel: Schakelt de WordPress Multisite functionaliteit aan of uit door de MULTISITE en SUBDOMAIN_INSTALL constanten in wp-config.php aan te passen.
+Acties:
+Controleert de huidige status van define( 'MULTISITE', ... );.
+Vraagt om bevestiging om de status te wisselen.
+Maakt een backup van wp-config.php.
+Past de waarde van MULTISITE aan (naar true of false).
+Past de waarde van SUBDOMAIN_INSTALL aan (naar true bij inschakelen, false bij uitschakelen).
+Als de regels niet bestaan, probeert het ze toe te voegen boven de "That's all" regel bij inschakelen.
+Interactie: Toont huidige status en vraagt om bevestiging [y/N].
+Opmerking: Dit is een snelle schakelaar en vervangt niet de volledige WordPress Netwerk Setup procedure. Andere constanten of configuraties (bv. in Nginx of .htaccess) worden niet aangepast.
+[C] Cookie Fix
+Doel: Past twee veelvoorkomende fixes toe voor het WordPress cookie-error probleem ("Cookies are Blocked or Not Supported").
+Acties:
+Voegt define('COOKIE_DOMAIN', $_SERVER['HTTP_HOST'] ); toe aan wp-config.php (als het nog niet bestaat).
+Vindt het functions.php bestand van het actieve WordPress thema (via WP-CLI).
+Voegt een PHP codeblok toe aan het einde van functions.php dat setcookie() gebruikt met SITECOOKIEPATH (als het nog niet bestaat, gecontroleerd via commentaar-markers).
+Maakt backups van beide bestanden voor de wijziging.
+Interactie: Geen directe gebruikersinvoer nodig, geeft feedback over acties.
+[U] Undo Cookie Fix
+Doel: Maakt de wijzigingen van optie [C] ongedaan.
+Acties:
+Verwijdert de define('COOKIE_DOMAIN', ...); regel uit wp-config.php (als deze bestaat).
+Vindt het functions.php van het actieve thema.
+Verwijdert het volledige codeblok (inclusief markers) dat door optie [C] is toegevoegd uit functions.php (als de start-marker wordt gevonden).
+Maakt backups voordat wijzigingen worden teruggedraaid.
+Interactie: Geen directe gebruikersinvoer nodig, geeft feedback.
+[V] Versies
+Doel: Toont de geïnstalleerde versies van de hoofdcomponenten.
+Acties: Voert nginx -v, mysql --version, en php -v uit en toont de output.
+Interactie: Geen.
+[H] Gezondheid
+Doel: Voert een reeks controles uit om de status van de geïnstalleerde stack te verifiëren.
+Acties:
+Controleert of de log directories (/var/log/nginx, /var/log/php-fpm) bestaan en probeert ze aan te maken indien nodig.
+Controleert of Nginx, MariaDB, PHP-FPM services zijn ingeschakeld (systemctl is-enabled).
+Controleert of Nginx, MariaDB, PHP-FPM services actief zijn (systemctl is-active).
+Probeert inactieve services automatisch te herstarten (als de log map bestaat).
+Controleert de Nginx configuratiesyntaxis (nginx -t).
+Controleert of het php commando werkt (php -v).
+Controleert of de WordPress map bestaat en niet leeg is.
+Controleert via WP-CLI of WordPress correct geïnstalleerd lijkt (wp core is-installed).
+Toont de WordPress admin login URL (indien bekend in de script sessie).
+Geeft een samenvatting van gevonden problemen.
+Interactie: Geen, toont alleen resultaten en diagnostische suggesties bij problemen.
+[R] Herstart Services
+Doel: Herstart de belangrijkste webserver-gerelateerde services.
+Acties: Voert systemctl restart uit voor nginx.service, mariadb.service, en php-fpm.service.
+Opmerking: Het herstarten van php-fpm leegt ook de APCu en OPcache.
+Interactie: Geen.
+[L] Logbestand
+Doel: Toont de inhoud van het script's eigen logbestand.
+Acties: Opent /var/log/lemp_wp_ms_optimized_apcu_install.log met less.
+Interactie: Gebruikt less voor navigatie (scrollen, 'q' om te sluiten).
+[0] Afsluiten
+Doel: Beëindigt het script.
+Acties: Print een afscheidsbericht en stopt de uitvoering.
+Hopelijk geeft dit een duidelijk beeld van wat het script doet en wat elke menu-optie inhoudt!
