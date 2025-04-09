@@ -1,5 +1,6 @@
 🛠️ FLM Tool – Fedora LEMP Multipress Installation Tool<br>
 Developed by H. Dabo<br><br>
+![Image](https://github.com/user-attachments/assets/704ff20f-6fd1-410d-9f31-15410d02e51f)
 FLM Tool (Fedora LEMP Multipress) is a simple, automated BASH script designed specifically for Fedora-based systems. It provides a fast and hassle-free way to set up a full LEMP stack <br>(Linux, Nginx, MariaDB, PHP) with optional WordPress Multisite (Multipress) support, including smart health checks and SELinux compatibility fixes.<br>
 <br>
 🔍 What it does:<br>
