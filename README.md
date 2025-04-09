@@ -35,7 +35,7 @@ sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FLM-Fedora
 sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FLM-Fedora.LEMP.Multipress.Tool/refs/heads/main/FLM%20tool%20Nederlands.sh)"
 </code></pre>
 These commands will automatically download and run the FLM Tool installation script for Fedora systems.
-No need to clone or download anything manually — just copy, paste, and you're good to go!
+No need to clone or download anything manually — just copy, paste, and you're good to go!<br><br>
 <br>
 ✔️ Works out-of-the-box on Fedora Desktop<br>
 ✔️ Includes SELinux fixes, health checks, and Multipress (WordPress Multisite) management<br>
