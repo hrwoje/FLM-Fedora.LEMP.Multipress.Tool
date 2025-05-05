@@ -14,6 +14,10 @@
 
 FNMPW Toolkit is a comprehensive automation suite for setting up and managing a complete web server stack on Fedora Linux. It provides an intuitive menu-driven interface to install, configure, and maintain all components of a modern web hosting environment.
 
+<pre><code id="command">
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolkit-Fedora-server-installation/refs/heads/main/installer.sh)"
+</code></pre>
+
 ## 🛠️ Components
 
 The toolkit consists of the following modules:
