@@ -14,6 +14,55 @@
 
 FNMPW Toolkit is a comprehensive automation suite for setting up and managing a complete web server stack on Fedora Linux. It provides an intuitive menu-driven interface to install, configure, and maintain all components of a modern web hosting environment.
 
+1-PHP-FPM installer directly from the terminal
+<pre><code id="command">
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolkit-Fedora-server-installation/refs/heads/main/1-php.sh)"
+</code></pre>
+
+2- Mysql installer directly from the terminal
+<pre><code id="command">
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolkit-Fedora-server-installation/refs/heads/main/2-mysql.sh)"
+</code></pre>
+
+3- Nginx installer directly from the terminal
+<pre><code id="command">
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolkit-Fedora-server-installation/refs/heads/main/3-nginx.sh)"
+</code></pre>
+
+4- Wordpress installer directly from the terminal
+<pre><code id="command">
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolkit-Fedora-server-installation/refs/heads/main/4-wordpress.sh)"
+</code></pre>
+
+5- Nginx serverblocks installer directly from the terminal
+<pre><code id="command">
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolkit-Fedora-server-installation/refs/heads/main/5-nginx-serverblocks.sh)"
+</code></pre>
+
+6- Multipress installer directly from the terminal
+<pre><code id="command">
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolkit-Fedora-server-installation/refs/heads/main/6-multipress.sh)"
+</code></pre>
+
+7- Security installer directly from the terminal
+<pre><code id="command">
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolkit-Fedora-server-installation/refs/heads/main/7-security.sh)"
+</code></pre>
+
+8- SSL installer directly from the terminal
+<pre><code id="command">
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolkit-Fedora-server-installation/refs/heads/main/8-ssl.sh)"
+</code></pre>
+
+9- Extra installer directly from the terminal
+<pre><code id="command">
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolkit-Fedora-server-installation/refs/heads/main/9-extra.sh)"
+</code></pre>
+
+Fix services installer directly from the terminal
+<pre><code id="command">
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolkit-Fedora-server-installation/refs/heads/main/fix_services.sh)"
+</code></pre>
 
 
 ## 🛠️ Components
