@@ -74,6 +74,12 @@ sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolk
 </code></pre><br>
 <br>
 
+Http2 http3 installer directly from the terminal
+<pre><code id="command">
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolkit-Fedora-server-installation/refs/heads/main/fix_services.sh)"
+</code></pre><br>
+<br>
+
 
 ## 🛠️ Components
 
