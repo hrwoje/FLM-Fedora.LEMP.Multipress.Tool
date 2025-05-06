@@ -76,7 +76,7 @@ sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolk
 
 Http2 http3 installer directly from the terminal
 <pre><code id="command">
-sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolkit-Fedora-server-installation/refs/heads/main/fix_services.sh)"
+sudo bash -c "bash <(curl -s https://raw.githubusercontent.com/hrwoje/FNPW-Toolkit-Fedora-server-installation/refs/heads/main/http.sh)"
 </code></pre><br>
 <br>
 
